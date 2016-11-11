@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Dropdown</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+	<script type = "text/javascript" src="{{ url_for('static', filename = 'js/jquery.js') }}"></script>
+    <script type = "text/javascript" src="{{ url_for('static', filename = 'js/jquery-ui.js') }}"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script>
+		function replacePage(){
+			document.body.innerHTML = '';
+		}
+	</script>
+	
+	<script>
+     $(document).ready(function(){	
+	  //get a reference to the select element
+			$.getJSON('/api/all_ratings?app_name=xtv') 
+				.done(function( outData ) {
+					$.each(outData, function(i, item) {
+						console.log(item.length)
+						for ( var i = 0, l = item.length; i < l; i++ ) {
+							$("#people").append('<option id="' + i + '">' + item[i] + '</option>')    
+						}
+					})
+				})
+				.fail(function(jqxhr, textStatus, error) {
+						var err = textStatus + ", " + error;
+						console.log( "Request Failed: " + err );
+					}
+				);
+			$('#people').change(function(){
+				var rating_retrieved = $( "#people option:selected" ).text();
+				console.log(rating_retrieved)
+				
+				$.getJSON('/api/single_ratings_view?app_name=xtv'+'&rating='+rating_retrieved) 
+				.done(function( outData ) {
+					$.each(outData, function(i, item) {
+						console.log(item.length)
+						for ( var i = 0, l = item.length; i < l; i++ ) {
+							$("#faqAccordion").append(
+							'<div class="panel panel-default ">' +
+								'<div class="panel-heading " data-toggle="collapse" data-parent="#faqAccordion" href="#'+i+'">'+
+									 '<h4 class="panel-title">'+
+										'<a href="#" class="ing">'+item[i].review_entry_title+'</a>'+
+								  '</h4>'+
+								'</div>'+
+								'<div id="'+i+'" class="panel-collapse collapse" style="height: 0px;">'+
+									'<div class="panel-body">'+
+										'<p><b>App_Version :: </b>'+item[i].review_app_version+'</p>'+
+										'<p><b>Review_comment_created_time :: </b>'+item[i].updated_time+'</p>'+
+										'<p><b>App_Review_Ratings :: </b>'+item[i].review_rating+'</p>'+
+										'<p><b>App_Review_Comments :: </b>'+item[i].review_comments+'</p>'+
+									'</div>'+
+								'</div>'+
+							'</div>');  
+											
+						}
+					})
+				}
+				)
+				.fail(function(jqxhr, textStatus, error) {
+						var err = textStatus + ", " + error;
+						console.log( "Request Failed: " + err );
+					}
+				);
+			});
+			
+	});
+	
+  </script>
+</head>
+<body>
+	<select id="people" ></select>
+	<div class="container" >
+	<div style="width:80%; background-color:#ffffff;float:right;margin-top: 5px">
+	<div class="panel-group" id="faqAccordion">
+	</div>
+	</div>
+	</div>
+
+</body>
+</html>

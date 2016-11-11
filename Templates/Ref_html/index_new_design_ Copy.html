@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>APP Store Review</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+     $(document).ready(function(){
+      $.getJSON('/api/get_reviews?app_name=xtv', function(outData) {
+        $.each(outData, function(i, item) {
+			console.log(item.length)
+            for ( var i = 0, l = item.length; i < l; i++ ) {
+			        $("#faqAccordion").append(
+							'<div class="panel panel-default ">' +
+								'<div class="panel-heading accordion-toggle question-toggle collapsed" data-toggle="collapse" data-parent="#faqAccordion" data-target="#'+i+'">'+
+									 '<h4 class="panel-title">'+
+										'<a href="#" class="ing">'+item[i].review_entry_title+'</a>'+
+								  '</h4>'+
+								'</div>'+
+								'<div id="'+i+'" class="panel-collapse collapse" style="height: 0px;">'+
+									'<div class="panel-body">'+
+										'<p><b>App_Version :: </b>'+item[i].review_app_version+'</p>'+
+										'<p><b>Review_comment_created_time :: </b>'+item[i].updated_time+'</p>'+
+										'<p><b>App_Review_Ratings :: </b>'+item[i].review_rating+'</p>'+
+										'<p><b>App_Review_Comments :: </b>'+item[i].review_comments+'</p>'+
+									'</div>'+
+								'</div>'+
+							'</div>');
+			}
+        });
+		$( "#faqAccordion" ).accordion({
+            collapsible: false,
+            autoHeight: true,
+            clearStyle: true
+          });
+      });
+	});
+  </script>
+  <style>
+		div.container {
+			width: 100%;
+			border: 0px solid gray;
+		}
+
+		header, footer {
+			padding: 1em;
+			color: white;
+			background-color: #0C3245;
+			clear: left;
+			text-align: center;
+		}
+
+		nav {
+			float: left;
+			max-width: 160px;
+			margin: 0;
+			padding: 1em;
+		}
+
+		nav ul {
+			list-style-type: none;
+			padding: 0;
+		}
+		   
+		nav ul a {
+			text-decoration: none;
+		}
+
+		article {
+			margin-left: 170px;
+			border-left: 1px solid gray;
+			padding: 1em;
+			overflow: hidden;
+		}
+</style>
+</head>
+<body>  
+   <div class="container " >
+	   <header>
+		   <h1>XFINITY APPS - APPSTORE REVIEW REPOSITORY
+		   <img src="smiley.gif" alt="Smiley face" width="42" height="42" align="right"></h1>
+	   </header>
+	   <div class="row">
+        <div class="col-sm-3 col-md-3">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
+                            </span>AppStore-Ratings View</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="http://www.jquery2dotnet.com">1</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-flash text-success"></span><a href="http://www.jquery2dotnet.com">2</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-file text-info"></span><a href="http://www.jquery2dotnet.com">3</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-comment text-success"></span><a href="http://www.jquery2dotnet.com">4</a>
+                                        <span class="badge">42</span>
+                                    </td>
+                                </tr>
+								<tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-comment text-success"></span><a href="http://www.jquery2dotnet.com">5</a>
+                                        <span class="badge">42</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th">
+                            </span>AppStore-Versions View</a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Orders</a> <span class="label label-success">$ 320</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Invoices</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Shipments</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="http://www.jquery2dotnet.com">Tex</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
+                            </span>PlayStore-Ratings View</a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="http://www.jquery2dotnet.com">1</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-flash text-success"></span><a href="http://www.jquery2dotnet.com">2</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-file text-info"></span><a href="http://www.jquery2dotnet.com">3</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-comment text-success"></span><a href="http://www.jquery2dotnet.com">4</a>
+                                        
+                                    </td>
+                                </tr>
+								<tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-comment text-success"></span><a href="http://www.jquery2dotnet.com">5</a>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-file">
+                            </span>AppStore-Versions View</a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Customers</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Products</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-shopping-cart"></span><a href="http://www.jquery2dotnet.com">Shopping Cart</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-9">
+            <div class="panel-group" id="faqAccordion">
+			</div>
+        </div>
+    </div>
+    </div>
+    <footer>
+		<div id="share-buttons">
+		  <div>
+			<h4>XFINITY APPS - APPLE APPSTORE APPS</h4>
+			<!--  XFINITY My Account App -->
+			<a href="https://itunes.apple.com/app/apple-store/id776010987?mt=8" target="_blank">
+				<img src="http://cdn.comcast.com/~/Media/2016/Apps Landing/image/my-account-app.png?rev=7b00c790-0beb-4507-b7c7-1e6beefc28f9" alt="Xfinity My Account App" />
+			</a>
+			
+			<!--  XFINITY TV + -->
+			<a href="https://itunes.apple.com/us/app/xfinity-tv/id731629156?mt=8" target="_blank">
+				<img src="http://cdn.comcast.com/~/Media/2016/Apps Landing/image/tv-app.png?rev=4a8b9e2f-1e29-4ad4-b9ba-8b1a889dbe4c" alt="Xfinity TV" />
+			</a>
+		<!--  XFINITY TV Remote -->
+			<a href="https://itunes.apple.com/us/app/xfinity-tv-remote/id401629893?mt=8" target="_blank">
+				<img src="http://cdn.comcast.com/~/Media/2016/Apps%20Landing/image/tv-remote-app.png?rev=276059f8-5036-4167-baca-ca45fa1104e6" alt="Xfinity TV Remote" />
+			</a>
+		<!-- XFINITY Connect -->
+			<a href="https://itunes.apple.com/us/app/xfinity-connect/id320788270?mt=8" target="_blank">
+				<img src="http://cdn.comcast.com/~/Media/2016/Apps Landing/image/connect-app.png?rev=b1866dfd-e384-4ddf-8a01-a2d2884d5cfb" alt="Xfinity Connect" />
+			</a>
+		<!-- XFINITY TV X1 Remote -->
+			<a href="https://itunes.apple.com/us/app/xfinity-tv-x1-remote/id527726789?mt=8" target="_blank">
+				<img src="{{ url_for('static', filename='images/xfinity_x1_tv_remote.png') }}" alt="XFINITY TV X1 Remote" />
+			</a>
+		
+		<!-- XFINITY Home -->
+			<a href="https://itunes.apple.com/us/app/xfinity-home/id418965252?mt=8" target="_blank">
+				<img src="http://cdn.comcast.com/~/Media/2016/Apps Landing/image/home-app.png?rev=222930e4-16e2-42f9-a28f-23e1734ccb6f" alt="Xfinity Home" />
+			</a>
+			
+			</div>
+			<div>
+			<h4>XFINITY APPS - GOOGLE PLAYSTORE APPS</h4>
+			<!--  XFINITY My Account App -->
+			<a href="https://play.google.com/store/apps/details?id=com.comcast.cvs.android" target="_blank">
+				<img src="http://cdn.comcast.com/~/Media/2016/Apps Landing/image/my-account-app.png?rev=7b00c790-0beb-4507-b7c7-1e6beefc28f9" alt="Xfinity My Account App" />
+			</a>
+			
+			<!--  XFINITY TV + -->
+			<a href="https://play.google.com/store/apps/details?id=com.xfinity.cloudtvr" target="_blank">
+				<img src="http://cdn.comcast.com/~/Media/2016/Apps Landing/image/tv-app.png?rev=4a8b9e2f-1e29-4ad4-b9ba-8b1a889dbe4c" alt="Xfinity TV" />
+			</a>
+		<!--  XFINITY TV Remote -->
+			<a href="https://play.google.com/store/apps/details?id=com.xfinity.tv" target="_blank">
+				<img src="http://cdn.comcast.com/~/Media/2016/Apps%20Landing/image/tv-remote-app.png?rev=276059f8-5036-4167-baca-ca45fa1104e6" alt="Xfinity TV Remote" />
+			</a>
+		<!-- XFINITY Connect -->
+			<a href="https://play.google.com/store/apps/details?id=net.comcast.ottclient&hl=en" target="_blank">
+				<img src="http://cdn.comcast.com/~/Media/2016/Apps Landing/image/connect-app.png?rev=b1866dfd-e384-4ddf-8a01-a2d2884d5cfb" alt="Xfinity Connect" />
+			</a>
+		<!-- XFINITY TV X1 Remote -->
+			<a href="https://play.google.com/store/apps/details?id=com.xfinity.remote" target="_blank">
+				<img src="{{ url_for('static', filename='images/xfinity_x1_tv_remote.png') }}" alt="XFINITY TV X1 Remote" />
+			</a>
+		
+		<!-- XFINITY Home -->
+			<a href="https://play.google.com/store/apps/details?id=com.comcast&hl=en" target="_blank">
+				<img src="http://cdn.comcast.com/~/Media/2016/Apps Landing/image/home-app.png?rev=222930e4-16e2-42f9-a28f-23e1734ccb6f" alt="Xfinity Home" />
+			</a>
+			
+			</div>
+			
+		 </div>
+			
+		<br>Copyright © <a href="http://www.xfinity.com">www.xfinity.com</br></footer>
+</body>
+</html>

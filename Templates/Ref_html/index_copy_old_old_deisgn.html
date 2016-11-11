@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>APP Store Review</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+  <script type = "text/javascript" src="{{ url_for('static', filename = 'js/jquery.js') }}"></script>
+  <script type = "text/javascript" src="{{ url_for('static', filename = 'js/jquery-ui.js') }}"></script>
+  <script>
+    $(function() {
+      $( "#quicklinks" ).accordion({
+        collapsible: false,
+        heightStyle: "content"
+        });      
+      });
+     $(document).ready(function(){
+      $.getJSON('/api/get_reviews?app_name=xtv', function(outData) {
+        $.each(outData, function(i, item) {
+			console.log(item.length)
+            for ( var i = 0, l = item.length; i < l; i++ ) {
+					$("#asset-list").append(
+					$(document.createElement('h3')).text(item[i].review_entry_title),
+					$(document.createElement('div'))
+					  .append("<p>App_Version :: " + item[i].review_app_version+ "<p>")
+					  .append("<p>Review_comment_updated_time :: " + item[i].updated_time + "<p>")
+					  .append("<p>App_Review_Ratings :: " + item[i].review_rating+ "<p>")
+					  .append("<p>App_Review_Comments :: " + item[i].review_comments+ "<p>")
+					  );	
+				}
+          });
+        $( "#asset-list" ).accordion({
+            collapsible: false,
+            autoHeight: true,
+            clearStyle: true
+          });
+        });
+      });
+  </script>
+  <style>
+    body{
+      font: 90% "Trebuchet MS", sans-serif;
+      margin: 40px;
+    }
+    .store-header {
+      margin-top: 2em;
+    }
+  </style>
+</head>
+
+<body style="background-color: #ffffff;overflow-y: scroll;background-color: #ffffff">  
+  <div style="width:100%; height:100%">
+    <div id='store-header'>
+      <h1 style="float: center;">CIM Testing - App Review Repository</h1>
+    </div>
+    <div style="width:20%; background-color:#ffffff;float:left;margin-top: 5px">
+        <div id="quicklinks">
+          <h3>Quick Links</h3>
+          <div>
+            <p><a href="/">SSS</a></p>
+            <p><a href="/">DD</a></p>
+            <p><a href="//">DD</a></p>
+          </div>
+        </div>
+    </div>
+    <div style="width:80%; background-color:#ffffff;float:right;margin-top: 5px">
+      <div id="asset-list" >
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
