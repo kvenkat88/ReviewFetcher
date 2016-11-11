@@ -37,7 +37,7 @@ Add these - C:\Python27\Scripts , C:\Python27\Tools\Scripts
 
 4.pymongo
 
-5.RabbitMQ - Task Queue Manager (https://www.rabbitmq.com/)
+5.RabbitMQ - Message Broker and Task Queue Manager (https://www.rabbitmq.com/)
 
 # Steps to execute - Using Command Prompt
 1.Download and save the scripts to the local directory/folder.
@@ -58,6 +58,7 @@ Note : Information parsed are based upon the response from Apple’s iTunes RSS 
 # Tools and Technologies used
 
 iTunes RSS Feed API – to retrieve the review comments for the AppStore hosted applications.
+
 1.Python 2.7
 
 2.Python Flask – Web Micro framework
@@ -71,4 +72,73 @@ iTunes RSS Feed API – to retrieve the review comments for the AppStore hosted 
 6.RabbitMQ – Scheduler Task Queue Handler
 
 7.HTML, JQuery and BootStrap3
+
+# Message Broker - RabbitMQ Commands:
+
+To Start server - rabbitmq-server
+
+To stop server - rabbitmqctl stop
+
+To list queues - rabbitmqctl list_queues
+
+To start the app - rabbitmqctl start_app
+
+To stop the app - rabbitmqctl stop_app
+
+To reset - rabbitmqctl reset
+
+# Celery Commands
+
+Windows celery beat mode format - celery beat -A celery_tasks_schedule_directory name.list of tasks to perform --loglevel=info
+
+Windows celery beat mode usage   - celery beat -A celery_tasks_schedule.tasks --loglevel=info
+
+MAC /Linux beat command - celery -A name_of_the_application worker -l info --beat
+
+MAC /Linux beat command usage - celery -A asset_store worker -l info --beat
+
+Viewing the celery workers logs - celery -A celery_tasks_schedule worker --loglevel=info
+
+# Starting the Celery Scheduler (steps for windows only and for mac refer the commands mentioned)
+
+1.Start the RabbitMQ Message broker in the backend in separate terminal/command prompt - rabbitmq-server
+
+2.In another terminal/command prompt and invoke the command to start the celerey in beat mode - celery beat -A celery_tasks_schedule.tasks --loglevel=info
+
+3.In another terminal/command prompt and invoke the command to view the celery logs 
+
+celery -A celery_tasks_schedule worker --loglevel=info
+
+# MongoDB Setup
+
+1.Please download the mongodb from the mongodb official website and set the environment as mentioned.
+
+2.Once the environment and data folder is set as per setup instructions,then run the command - mongod and verify whether MongoDB is up.
+
+3.Use the below mentioned links for exporting  and importing the mongodb records while setting up the environment,
+  http://lornajane.net/posts/2011/importing-and-exporting-mongodb-databases (Preferred one) 
+  
+  https://www.mkyong.com/mongodb/mongodb-import-and-export-example/
+  
+  # Sample commands to export the mongodb data available in local machine - mongodump -d mongo_db_name -o folder_you_want_to_use
+  
+   Example : mongodump -d app_store_holder -o app_review_repo_info
+  
+  # Sample commands to import the mongodb data available in local machine - mongorestore -d mongo_db_name /path/to/db_records_exported
+  
+   Example : mongorestore -d app_store_holder /path/to/app_store_holder
+   
+   
+  
+   
+  
+  
+ 
+
+  
+
+
+
+
+
 
