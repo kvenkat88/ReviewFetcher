@@ -22,9 +22,9 @@
 Add these - C:\Python27\Scripts , C:\Python27\Tools\Scripts
 
 # Required Package Installation
-1.This script would need a httplib2 python pacakage to establish a http connection.
+1.This script would need a required python pacakage.
 
-2.Install this package using the command - pip install httplib2
+2.Install this package using the command - pip install <package name>
 
 3.Note: Make python package installer(pip) is available in the machine.It would be available while installing the preferred version of python for your machine.
 
